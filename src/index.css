@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Base Variables - Balanced (Default) */
+  --color-surface: var(--surface, #fcf8ff);
+  --color-surface-dim: var(--surface-dim, #dad7f3);
+  --color-surface-bright: var(--surface-bright, #fcf8ff);
+  --color-surface-container-lowest: var(--surface-container-lowest, #ffffff);
+  --color-surface-container-low: var(--surface-container-low, #f5f2ff);
+  --color-surface-container: var(--surface-container, #efecff);
+  --color-surface-container-high: var(--surface-container-high, #e8e5ff);
+  --color-surface-container-highest: var(--surface-container-highest, #e2e0fc);
+  
+  --color-on-surface: var(--on-surface, #1a1a2e);
+  --color-on-surface-variant: var(--on-surface-variant, #47464e);
+  
+  --color-primary: var(--primary, #5b5b81);
+  --color-primary-container: var(--primary-container, #a7a6d1);
+  --color-on-primary-container: var(--on-primary-container, #3b3b5f);
+  
+  --color-secondary: var(--secondary, #4c644f);
+  --color-secondary-container: var(--secondary-container, #ceeace);
+  --color-on-secondary-container: var(--on-secondary-container, #526a54);
+  
+  --color-outline: var(--outline, #78767f);
+  --color-outline-variant: var(--outline-variant, #c8c5cf);
+
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+@layer base {
+  @property --surface { syntax: '<color>'; inherits: true; initial-value: #fcf8ff; }
+  @property --primary { syntax: '<color>'; inherits: true; initial-value: #5b5b81; }
+  @property --primary-container { syntax: '<color>'; inherits: true; initial-value: #a7a6d1; }
+  @property --secondary { syntax: '<color>'; inherits: true; initial-value: #4c644f; }
+  @property --on-surface { syntax: '<color>'; inherits: true; initial-value: #1a1a2e; }
+
+  :root {
+    --surface: #fcf8ff;
+    --primary: #5b5b81;
+    --primary-container: #a7a6d1;
+    --secondary: #4c644f;
+    --glass-opacity: 0.4;
+    --glass-blur: 24px;
+  }
+
+  /* Minimal Theme: Desaturated, high contrast, clean */
+  .theme-minimal {
+    --surface: #fafafa;
+    --surface-container: #f4f4f4;
+    --primary: #2d2d2d;
+    --primary-container: #e0e0e0;
+    --primary-container-rgb: 224, 224, 224;
+    --secondary: #4a4a4a;
+    --secondary-container-rgb: 200, 200, 200;
+    --glass-opacity: 0.1;
+    --glass-blur: 10px;
+    --on-surface: #000000;
+    --surface-container-highest: #eeeeee;
+  }
+
+  /* Colorful Theme: Vibrant, high saturation, playful */
+  .theme-colorful {
+    --surface: #fdf2f8;
+    --primary: #ec4899;
+    --primary-container: #fbcfe8;
+    --primary-container-rgb: 251, 207, 232;
+    --secondary: #8b5cf6;
+    --secondary-container: #ddd6fe;
+    --secondary-container-rgb: 221, 214, 254;
+    --glass-opacity: 0.6;
+    --glass-blur: 32px;
+    --on-surface: #311b92;
+    --surface-container-highest: #fbcfe8;
+  }
+
+  /* Balanced Theme: Natural, harmonious, soft */
+  .theme-balanced {
+    --surface: #fcf8ff;
+    --primary: #5b5b81;
+    --primary-container: #a7a6d1;
+    --primary-container-rgb: 167, 166, 209;
+    --secondary: #4c644f;
+    --secondary-container: #ceeace;
+    --secondary-container-rgb: 206, 234, 206;
+    --glass-opacity: 0.4;
+    --glass-blur: 24px;
+    --on-surface: #1a1a2e;
+    --surface-container-highest: #e2e0fc;
+  }
+
+  /* Deep Sea Mode: Pure deep dark, mysterious, calm */
+  .theme-deepsea {
+    --surface: #0a0a0c;
+    --primary: #4a5568;
+    --primary-container: #2d3748;
+    --secondary: #1a202c;
+    --secondary-container: #171923;
+    --glass-opacity: 0.15;
+    --glass-blur: 40px;
+    --on-surface: #e2e8f0;
+    --outline: #4a5568;
+    --surface-container-highest: #1a202c;
+  }
+
+  body {
+    @apply bg-surface text-on-surface font-sans antialiased min-h-screen selection:bg-primary-container/30 transition-colors duration-700;
+    background-image: 
+      radial-gradient(at 0% 0%, color-mix(in srgb, var(--primary-container), transparent 90%) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, color-mix(in srgb, var(--secondary-container, var(--primary-container)), transparent 92%) 0px, transparent 50%);
+  }
+}
+
+@layer components {
+  .glass-pane {
+    background-color: rgba(255, 255, 255, var(--glass-opacity));
+    backdrop-filter: blur(var(--glass-blur));
+    @apply border border-white/30 shadow-sm relative overflow-hidden transition-all duration-700;
+  }
+  
+  .breathing-glow {
+    @apply shadow-[0_0_40px_rgba(167,166,209,0.15)];
+  }
+}
